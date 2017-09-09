@@ -16,4 +16,9 @@ describe('Message', () => {
     let coordinates = getCoordinatesFromMessage('this message doesn\'t have any coordinates');
     expect(coordinates).toBe('9.0000000000,0.0000000000');
   });
+
+  it('should handle empty messages', () => {
+    let coordinates = getCoordinatesFromMessage(undefined);
+    expect(coordinates).toBe('9.0000000000,0.0000000000');
+  });
 });
