@@ -39,7 +39,7 @@ client.on('message', message => {
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    console.log('message updated');
+    // console.log('message updated');
 });
 
 client.on('error', () => {
