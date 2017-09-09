@@ -24,19 +24,16 @@
     "@types/geolib": "~2.0.2",
     "@types/jasmine": "~2.5.54",
     "@types/node": "~8.0.28",
-    "@types/request": "~2.0.3",
     "@types/winston": "~2.3.5",
     "discord.js": "~11.2.1",
     "dotenv": "~4.0.0",
     "geolib": "~2.0.23",
     "jasmine": "~2.8.0",
     "lodash": "~4.17.4",
-    "request": "~2.81.0",
-    "request-promise": "~4.2.1",
     "rimraf": "~2.6.1",
     "rxjs": "~5.4.3",
     "typescript": "~2.5.2",
-    "vue-cli": "~2.8.2",
+    "websocket": "~1.0.24",
     "winston": "~2.3.1"
   }
 }
