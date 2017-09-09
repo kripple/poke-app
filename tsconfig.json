@@ -1,6 +1,6 @@
 {
    "compilerOptions": {
-       "types" : ["node"],
+       "types" : ["node", "jasmine"],
        "typeRoots" : ["./node_modules"]
    }
 }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "node_modules/jasmine/bin/jasmine.js build/**/*.spec.js",
     "compile": "tsc --outDir build src/*",
     "recompile": "yarn run compile -- --watch",
     "start": "node build/main.js",
@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/kripple/poke-app#readme",
   "dependencies": {
+    "@types/jasmine": "^2.5.54",
     "@types/node": "^8.0.28",
     "discord": "~0.8.2",
-    "request": "^2.81.0",
+    "jasmine": "^2.8.0",
+    "request": "~2.81.0",
     "request-promise": "~4.2.1",
     "rimraf": "~2.6.1",
     "typescript": "~2.5.2"
