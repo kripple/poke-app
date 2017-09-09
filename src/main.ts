@@ -11,6 +11,7 @@ import { Env } from './env';
 // TBD: handle error cases
 const Discord = require('discord.js');
 const client = new Discord.Client({ disabledEvents: DisabledEvents });
+const WebSocketServer = require('websocket').server;
 
 client.login(Env.token)
     .then((response) => {
