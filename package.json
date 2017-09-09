@@ -1,0 +1,29 @@
+{
+  "name": "poke-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "compile": "tsc --outDir build src/*",
+    "recompile": "yarn run compile -- --watch",
+    "serve": "node build/main.js",
+    "clean": "rimraf build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kripple/poke-app.git"
+  },
+  "author": "Kelly Ripple",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kripple/poke-app/issues"
+  },
+  "homepage": "https://github.com/kripple/poke-app#readme",
+  "dependencies": {
+    "discord": "~0.8.2",
+    "request-promise": "~4.2.1",
+    "rimraf": "~2.6.1",
+    "typescript": "~2.5.2"
+  }
+}
