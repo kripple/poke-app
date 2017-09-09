@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/jasmine/bin/jasmine.js build/**/*.spec.js",
-    "compile": "tsc --outDir build src/*",
+    "compile": "tsc --outDir build --inlineSourceMap src/*",
     "recompile": "yarn run compile -- --watch",
     "start": "node build/main.js",
     "clean": "rimraf build"
@@ -21,15 +21,21 @@
   },
   "homepage": "https://github.com/kripple/poke-app#readme",
   "dependencies": {
+    "@types/geolib": "~2.0.2",
     "@types/jasmine": "~2.5.54",
     "@types/node": "~8.0.28",
     "@types/request": "~2.0.3",
+    "@types/winston": "~2.3.5",
     "discord.js": "~11.2.1",
     "dotenv": "~4.0.0",
+    "geolib": "~2.0.23",
     "jasmine": "~2.8.0",
+    "lodash": "~4.17.4",
     "request": "~2.81.0",
     "request-promise": "~4.2.1",
     "rimraf": "~2.6.1",
-    "typescript": "~2.5.2"
+    "rxjs": "~5.4.3",
+    "typescript": "~2.5.2",
+    "winston": "~2.3.1"
   }
 }
