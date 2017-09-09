@@ -1,6 +1,8 @@
 import { includes } from 'lodash';
 import { DisabledEvents } from './disabled-events';
-import { Channels } from './channels';
+import { Channels, SightingsChannels } from './channels';
+import { getCoordinatesFromMessage } from './message';
+import { getDistanceFromMe } from './distance';
 import { Env } from './env';
 
 // TBD: add winston logging
@@ -22,12 +24,30 @@ client.on('ready', () => {
   console.log('discord client enabled');
 });
 
+// TBD: grab team allegiances 
+client.on('message', message => {
+    if(includes(Channels, +message.channel.id)) {
+        console.log(`${message.channel.name}\n${message.author.username}: ${message.content}\n`);
+    } 
+    if(includes(SightingsChannels, +message.channel.id)) {
+        let coords = getCoordinatesFromMessage(message.contents);
+        let distance = getDistanceFromMe(coords);
+        if(distance < 5) {
+            console.log('\n\n\n* RED ALERT *\n\n');
+        }
+    } 
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+    console.log('message updated');
+});
+
 client.on('error', () => {
     console.log('encountered unknown error');
 });
 
 client.on('debug', info => {
-    console.log(`debug info: ${info}`);
+    // console.log(`debug info: ${info}`);
 });
 
 client.on('disconnect', () => {
@@ -45,16 +65,3 @@ client.on('resume', () => {
 client.on('warn', warning => {
     console.log(`warning: ${warning}`);
 });
-
-// TBD: grab team allegiances 
-client.on('message', message => {
-    if(includes(Channels, +message.channel.id)) {
-        console.log(`${message.channel.name}\n${message.author.username}: ${message.content}\n`);
-    } 
-});
-
-client.on('messageUpdate', (oldMessage, newMessage) => {
-    console.log('message updated');
-});
-
-
