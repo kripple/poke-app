@@ -4,65 +4,75 @@ import { Channels, SightingsChannels } from './channels';
 import { getCoordinatesFromMessage } from './message';
 import { getDistanceFromMe } from './distance';
 import { Env } from './env';
+import { round } from 'lodash';
+import { newLogger } from './logger';
 
 // TBD: add winston logging
 // TBD: add RxJS
 // TBD: protect rate limits
 // TBD: handle error cases
+const log = newLogger('Main');
 const Discord = require('discord.js');
 const client = new Discord.Client({ disabledEvents: DisabledEvents });
-const WebSocketServer = require('websocket').server;
 
 client.login(Env.token)
     .then((response) => {
-        console.log('authenticated');
+        log.info('authenticated');
     })
     .catch((error) => {
-        console.log(`failed to authenticate: ${error.message}`);
+        log.error(`failed to authenticate: ${error.message}`);
     });
 
 client.on('ready', () => {
-  console.log('discord client enabled');
+  log.info('discord client enabled');
 });
 
 // TBD: grab team allegiances 
 client.on('message', message => {
+    console.log('peep');
     if(includes(Channels, +message.channel.id)) {
-        console.log(`${message.channel.name}\n${message.author.username}: ${message.content}\n`);
+        let displayMessage = `${message.channel.name}\n${message.author.username}: ${message.content}\n`;
+        log.info(displayMessage);
+        // webSocketServer.broadcast(displayMessage);
     } 
     if(includes(SightingsChannels, +message.channel.id)) {
         let coords = getCoordinatesFromMessage(message.contents);
         let distance = getDistanceFromMe(coords);
         if(distance < 5) {
-            console.log('\n\n\n* RED ALERT *\n\n');
+            let displayMessage = '\n\n\n* RED ALERT *\n\n';
+            log.info(displayMessage);
+            // webSocketServer.broadcast(displayMessage);
         }
+        let displayMessage = `distance: ${distance > 10 ? round(distance) : round(distance, 2)} miles\n`;
+        log.info(displayMessage);
+        // webSocketServer.broadcast(displayMessage);
     } 
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    // console.log('message updated');
+    // log.info('message updated');
 });
 
 client.on('error', () => {
-    console.log('encountered unknown error');
+    log.error('encountered unknown error');
 });
 
 client.on('debug', info => {
-    // console.log(`debug info: ${info}`);
+    log.debug(`debug info: ${info}`);
 });
 
 client.on('disconnect', () => {
-    console.log('disconnected');
+    log.info('disconnected');
 });
 
 client.on('reconnecting', () => {
-    console.log('reconnecting');
+    log.info('reconnecting');
 });
 
 client.on('resume', () => {
-    console.log('resume');
+    log.info('resume');
 });
 
 client.on('warn', warning => {
-    console.log(`warning: ${warning}`);
+    log.info(`warning: ${warning}`);
 });
